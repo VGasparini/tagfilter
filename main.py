@@ -12,8 +12,11 @@ if __name__ == "__main__":
         print("Error: Unable to authenticate")
 
     try:
-        myStream = Stream(auth=api.auth, listener=Listener())
-        myStream.filter(track=hashtag_to_track)
+        for tag in hashtag_to_track:
+            listener = Listener()
+            listener.set_limit(10)
+            myStream = Stream(auth=api.auth, listener=listener)
+            myStream.filter(track=[tag], is_async=True)
     except Exception as e:
         myStream.disconnect()
         print(str(e))
