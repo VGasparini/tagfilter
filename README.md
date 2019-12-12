@@ -25,7 +25,7 @@ Aplicação para acompanhamento de tags do Twitter
 * ~Filtrar tweets por um conjunto de hashtags~
 * ~Formatar dados para o padrão: mensagem, autor, data de publicação~
 * ~Separar rotinas~
-* Preparar objetos para usar no front
+* ~Preparar objetos para usar no front~
 
 ### Front
 * Criar um site básico
