@@ -7,7 +7,6 @@ class Credentials:
         self.CONSUMER_SECRET     = os.environ["CONSUMER_SECRET"]
         self.ACCESS_TOKEN        = os.environ["ACCESS_TOKEN"]
         self.ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
-        print(self.ACCESS_TOKEN)
 
     def set_credentials(self, **args):
         self.CONSUMER_KEY        = args["CONSUMER_KEY"]
