@@ -1,12 +1,20 @@
 from tweepy import OAuthHandler
-import os
+import os,json
 
 class Credentials:
     def __init__(self):
-        self.CONSUMER_KEY        = os.environ["CONSUMER_KEY"]
-        self.CONSUMER_SECRET     = os.environ["CONSUMER_SECRET"]
-        self.ACCESS_TOKEN        = os.environ["ACCESS_TOKEN"]
-        self.ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
+        try:
+            self.CONSUMER_KEY        = os.environ["CONSUMER_KEY"]
+            self.CONSUMER_SECRET     = os.environ["CONSUMER_SECRET"]
+            self.ACCESS_TOKEN        = os.environ["ACCESS_TOKEN"]
+            self.ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
+        except:
+            with open('credentials.json','r') as json_file:
+                secrets = json.load(json_file)
+            self.CONSUMER_KEY        = secrets["CONSUMER_KEY"]
+            self.CONSUMER_SECRET     = secrets["CONSUMER_SECRET"]
+            self.ACCESS_TOKEN        = secrets["ACCESS_TOKEN"]
+            self.ACCESS_TOKEN_SECRET = secrets["ACCESS_TOKEN_SECRET"]
 
     def set_credentials(self, **args):
         self.CONSUMER_KEY        = args["CONSUMER_KEY"]
