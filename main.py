@@ -1,7 +1,8 @@
 from config import *
 from stream import *
 
-hashtag_to_track = ['bolsonaro', 'lula']
+# Setup keywords or hashtags to track
+hashtag_to_track = ['celular','android','#apple','#ios']
 
 if __name__ == "__main__":
     credentials = Credentials().authenticate()
@@ -14,7 +15,7 @@ if __name__ == "__main__":
     try:
         for tag in hashtag_to_track:
             listener = Listener()
-            listener.set_limit(10)
+            listener.set_limit(2) # Setting limit to better data visualization
             myStream = Stream(auth=api.auth, listener=listener)
             myStream.filter(track=[tag], is_async=True)
     except Exception as e:
