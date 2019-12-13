@@ -5,7 +5,7 @@ class Tweet:
         self.date = data.created_at.time()
         self.user = User(data.author)
         self.id = data.id_str
-        self.tweet_url = 'twitter.com/{}/status/{}'.format(self.user.get_username(),self.id)
+        self.tweet_url = 'https://twitter.com/{}/status/{}'.format(self.user.get_username(),self.id)
         self.is_quote = data.is_quote_status
         self.hashtags = [tag['text'] for tag in data.entities['hashtags']]
 
@@ -32,8 +32,10 @@ class Tweet:
         tweet_date = '['+str(self.date)+'] '
         tweet_user = str(self.user)
         tweet_text = ''
+        tweet_tags = 'None' if self.hashtags == None else ' '.join(self.hashtags)
+        tweet_url = self.tweet_url
         if self.is_quote:
-            tweet_text = 'Quote\n"'+self.quote_text+'" '+self.tweet_url+'\nRetuitando @'+self.original_tweet_user.get_username() 
-        tweet_text += '"'+self.original_text+'" '+self.tweet_url
+            tweet_text = '"'+self.quote_text+'" '+'\n--- Retweeting @'+self.original_tweet_user.get_username()+'\n' 
+        tweet_text += '"'+self.original_text+'" '
 
-        return tweet_date+'\n'+tweet_user+'\n'+tweet_text+'\nTags: '+' '.join(self.hashtags)
+        return '-'*3+tweet_date+' '+tweet_user+' tweeted:\n'+tweet_text+'\nTags: '+tweet_tags+'\nUrl: '+tweet_url
