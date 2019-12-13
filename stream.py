@@ -1,7 +1,7 @@
 from tweet import *
+from app import *
 
 from tweepy import Stream, StreamListener, API, models
-import json
 
 # A listener handles tweets that are received from the stream.
 class Listener(StreamListener):
@@ -20,7 +20,7 @@ class Listener(StreamListener):
         print("Stream API Connected")
 
     def on_status(self, status):
-        print(Tweet(status))
+        add_tweet(Tweet(status))
 
         # Controlling number o tweets to get
         if self.counter < self.limit:
