@@ -28,10 +28,10 @@ Aplicação para acompanhamento de tags do Twitter
 * ~Preparar objetos para usar no front~
 
 ### Front
-* Criar um site básico
-* Integrar campo de inserção de hashtags
-* Exibir mensagens filtradas
-* Interagir com filtros (remover)
+* ~Criar um site básico~
+* ~Integrar campo de inserção de hashtags~
+* ~Exibir mensagens filtradas~
+* ~Interagir com filtros (remover)~
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
