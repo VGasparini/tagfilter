@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+{%block content%}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - VGasparini</title>
+    <meta name="description" content="A Twitter aplication that filter tweets by a list of tags">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/font-awesome.min.css') }}">
+</head>
+
+<body id="page-top">
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
+        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">TAG FILTER</a><button
+                data-toggle="collapse" data-target="#navbarResponsive"
+                class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i
+                    class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                            class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#app">APLICAÇÃO</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                            class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">SOBRE</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                            class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">CONTATO</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header id="app" class="masthead bg-primary text-white text-center">
+        <div class="container">
+            <h1>Tag Filter</h1>
+            <p>Para utilizar, insira as palavras-chave que deseja filtar.<br>Em seguida, pressione o botão "Adicionar"
+            </p>
+            <hr class="star-light">
+        </div>
+        <div class="card" style="margin-right: 30px;margin-left: 30px;">
+            <div class="card-header">
+                <h5 class="text-dark">Tuítes</h5>
+            </div>
+            <form action="/" method="POST">
+                <div class="input-group"
+                    style="margin-right: 30px;margin-left: 30px;width: auto;margin-bottom: 10px;margin-top: 10px;">
+                    <div class="input-group-prepend">
+                    </div><input id="tag_input" name="tag_input" class="form-control" type="text"
+                        style="width: 200px; height: 45px;"
+                        placeholder="Insira aqui o que deseja acompanhar. Assunto ou hastag">
+                    <div class="input-group-append"><button class="btn btn-primary" type="submit">Adicionar</button>
+                    </div>
+                </div>
+            </form>
+            <div class="container" style="margin-right: 10px;margin-left: 10px;width: auto;">
+                <div class="text-left">
+                    <div class="btn-toolbar">
+                        <!-- TAGS INICIO -->
+                        {% for tag in tags %}
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-primary" type="button"
+                                style="margin-right: 5px;margin-left: 5px;">{{tag}} <strong>X</strong></button>
+                        </div>
+                        {% endfor %}
+                        <!-- TAGS FIM -->
+                    </div>
+                </div>
+            </div>
+            <div class="card-body text-left">
+                <!--  TWEETS INICIO -->
+                {% for tweet in tweets %}
+                <hr>
+                <div><strong class="text-left text-secondary">{{tweet.get_date()}}&nbsp; - <a
+                            href="{{tweet.get_user().get_user_url()}}">@{{tweet.get_user().get_username()}}</a>
+                        tuítou:</strong>
+                    <p class="text-left text-secondary">{{ tweet.get_text() }}</p>
+                    {% if tweet.get_is_quote() %}
+                    <strong class="text-left text-secondary">Retuítando <a
+                            href="{{ tweet.get_ret_user().get_user_url()}}">@{{ tweet.get_ret_user().get_username() }}:</strong></a>
+                    <p class="text-left text-secondary">{{ tweet.get_ret_text() }}</p>
+                    {% endif %}
+                    <em class="text-black-50">Tags: {{tweet.get_tags()}}</em><br>
+                    <em class="text-black-50">Link para tuíte: <a
+                            href="{{tweet.get_url()}}">{{tweet.get_url()}}</a></em>
+                </div>
+                {% endfor %}
+                <!--  TWEETS FIM -->
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="bg-primary text-white mb-0">
+        <div class="container">
+            <h2 class="text-uppercase text-center text-white">SOBRE</h2>
+            <hr class="star-light mb-5">
+            <div class="row">
+                <div class="col-lg-4 ml-auto">
+                    <p class="lead text-justify"><strong>Tag Filter&nbsp;é uma aplicação para acompanhamento de tags no
+                            Twitter.</strong><br><strong>Construido em Python, Tag Filter foi desenvolvido como parte do
+                            processo seletivo da empresa </strong><a href="https://magrathealabs.com/"
+                            style="color: #09493c">
+                            <strong>Magrathea
+                                Labs</strong></a>.</p>
+                </div>
+                <div class="col-lg-4 mr-auto">
+                    <p class="lead text-justify">Para construção da solução foi utilizado o <em>wrapper </em><a
+                            href="https://www.tweepy.org/" style="color: #09493c"><strong>Tweepy</strong></a><strong>.
+                            Uma vez construído o
+                        </strong><em>handler </em>das mensagens filtradas, foi utilizado<strong> </strong>
+                        <a href="https://www.palletsprojects.com/p/flask/"
+                            style="color: #09493c"><strong>Flask</strong></a><strong>&nbsp;</strong>para
+                        criação de uma interface web amigável.</p>
+                </div>
+            </div>
+            <div class="text-center mt-4"><a class="btn btn-outline-light btn-xl" role="button"
+                    href="https://github.com/VGasparini/tag-filter" target="_blank"><i
+                        class="fa fa-paper-plane-o mr-2"></i><span>Link
+                        para repositório</span></a></div>
+        </div>
+    </section>
+    <section id="contact">
+        <div class="container">
+            <h2 class="text-uppercase text-center text-secondary mb-0">CONTATO</h2>
+            <hr class="star-dark mb-5">
+
+            <div class="form-group">
+                <h1 class="text-center">Vinicius Gasparini</h1>
+                <p class="text-left" style="font-size: 20px;"><br><i class="fa fa-github-square"
+                        style="font-size: 24px;"></i>&nbsp;<a
+                        href="https://github.com/VGasparini">github.com/VGasparini</a><br><i
+                        class="fa fa-linkedin-square" style="font-size: 24px;"></i>&nbsp;<a
+                        href="https://www.linkedin.com/in/gasparinivinicius">linkedin.com/in/gasparinivinicius</a><br>
+                    <i class="fa fa-envelope" style="font-size: 21px;"></i>&nbsp;<a
+                        href="mailto:viniciuszeiko@gmail.com">viniciuszeiko@gmail.com</a><br><i class="fa fa-home"
+                        style="font-size: 24px;"></i>&nbsp;<a href="https://vgasparini.dev/">vgasparini.dev</a></p>
+            </div>
+        </div>
+    </section>
+    <div class="copyright py-4 text-center text-white">
+        <div class="container"><small>Copyright ©&nbsp;VGasparini 2019</small></div>
+    </div>
+    <div class="d-lg-none scroll-to-top position-fixed rounded"><a
+            class="d-block js-scroll-trigger text-center text-white rounded" href="#page-top"><i
+                class="fa fa-chevron-up"></i></a></div>
+
+    {% endblock %}
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/bootstrap.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="{{ url_for('static', filename='js/freelancer.js') }}"></script>
+</body>
+
+</html>
