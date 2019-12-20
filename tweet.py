@@ -1,9 +1,15 @@
 from user import *
+from datetime import timedelta
+import datetime
 
 
 class Tweet:
+    '''
+    Tweet class stores the tweet data that we use
+    '''
+
     def __init__(self, data):
-        self.date = data.created_at.time()
+        self.date = (data.created_at + timedelta(hours=-3)).time()
         self.user = User(data.author)
         self.id = data.id_str
         self.tweet_url = 'https://twitter.com/{}/status/{}'.format(
@@ -44,6 +50,13 @@ class Tweet:
 
         return '-'*3+tweet_date+' '+tweet_user+' tweeted:\n'+tweet_text+'\nTags: '+tweet_tags+'\nUrl: '+tweet_url
 
+    def __gt__(self, other):
+        # Greater operator used on sort
+        if(self.date > other.date):
+            return True
+        else:
+            return False
+
     def get_date(self):
         return '['+str(self.date)+'] '
 
@@ -51,7 +64,7 @@ class Tweet:
         return self.user
 
     def get_tags(self):
-        return 'None' if self.hashtags == None else ' '.join(
+        return 'None' if self.hashtags == None else ' #'.join(
             self.hashtags)
 
     def get_url(self):
@@ -70,3 +83,6 @@ class Tweet:
 
     def get_ret_text(self):
         return '"'+self.quote_text+'"'
+
+    def get_id(self):
+        return self.id
