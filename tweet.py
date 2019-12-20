@@ -1,11 +1,13 @@
 from user import *
 
+
 class Tweet:
     def __init__(self, data):
         self.date = data.created_at.time()
         self.user = User(data.author)
         self.id = data.id_str
-        self.tweet_url = 'https://twitter.com/{}/status/{}'.format(self.user.get_username(),self.id)
+        self.tweet_url = 'https://twitter.com/{}/status/{}'.format(
+            self.user.get_username(), self.id)
         self.is_quote = data.is_quote_status
         self.hashtags = [tag['text'] for tag in data.entities['hashtags']]
 
@@ -22,7 +24,7 @@ class Tweet:
                 self.quote_text = data.quoted_status.extended_tweet["full_text"]
             else:
                 self.quote_text = data.quoted_status.text
-        
+
         if data.truncated:
             self.original_text = data.extended_tweet["full_text"]
         else:
@@ -32,10 +34,39 @@ class Tweet:
         tweet_date = '['+str(self.date)+'] '
         tweet_user = str(self.user)
         tweet_text = ''
-        tweet_tags = 'None' if self.hashtags == None else ' '.join(self.hashtags)
+        tweet_tags = 'None' if self.hashtags == None else ' '.join(
+            self.hashtags)
         tweet_url = self.tweet_url
         if self.is_quote:
-            tweet_text = '"'+self.quote_text+'" '+'\n--- Retweeting @'+self.original_tweet_user.get_username()+'\n' 
+            tweet_text = '"'+self.quote_text+'" '+'\n--- Retweeting @' + \
+                self.original_tweet_user.get_username()+'\n'
         tweet_text += '"'+self.original_text+'" '
 
         return '-'*3+tweet_date+' '+tweet_user+' tweeted:\n'+tweet_text+'\nTags: '+tweet_tags+'\nUrl: '+tweet_url
+
+    def get_date(self):
+        return '['+str(self.date)+'] '
+
+    def get_user(self):
+        return self.user
+
+    def get_tags(self):
+        return 'None' if self.hashtags == None else ' '.join(
+            self.hashtags)
+
+    def get_url(self):
+        return self.tweet_url
+
+    def get_text(self):
+        tweet_text = '"'+self.original_text+'" '
+
+        return tweet_text
+
+    def get_is_quote(self):
+        return self.is_quote
+
+    def get_ret_user(self):
+        return self.original_tweet_user
+
+    def get_ret_text(self):
+        return '"'+self.quote_text+'"'
