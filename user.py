@@ -1,4 +1,8 @@
 class User:
+    '''
+    User class stores user data and have get methods
+    '''
+
     def __init__(self, author):
         self.name = author.name
         self.username = author.screen_name
