@@ -33,13 +33,13 @@ def update(extractors):
     global tweets
 
     for extractor in extractors:
-        print("Retrieving data for tag:", str(*extractor.hashtag_to_track))
+        print("Retrieving data for tag:", str(extractor.hashtag_to_track))
         extractor.run()
         sleep(1)
         for stream in extractor.streams:
             for tweet in stream.listener.tweets:
                 if not tweet[1].get_id() in ids:
-                    add_tweet((str(*extractor.hashtag_to_track), tweet[1]))
+                    add_tweet((*extractor.hashtag_to_track, tweet[1]))
 
     tweets.sort(reverse=True)
 
@@ -56,12 +56,12 @@ class App():
 
                 if 'tag_input' in request.form.keys():
                     # Add new tag from input field
-                    data = list(request.form['tag_input'].split(';'))
+                    data = list(request.form['tag_input'].replace(
+                        ' ', '').split(';'))
                     for tag in data:
                         tags.add(tag)
-
-                    ex = Extractor(data)
-                    extractors.append(ex)
+                        ex = Extractor([tag])
+                        extractors.append(ex)
 
                 elif 'tag_button' in request.form.keys():
                     # Removes tag button when is pressed
@@ -100,7 +100,7 @@ class App():
 
     def run(self):
         port = int(os.environ.get('PORT', 5000))
-        self.app.run(threaded=True, host='0.0.0.0', port=port)
+        self.app.run(host='0.0.0.0', port=port)
 
 
 if __name__ == '__main__':
