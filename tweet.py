@@ -64,8 +64,8 @@ class Tweet:
         return self.user
 
     def get_tags(self):
-        return 'None' if self.hashtags == None else ' #'.join(
-            self.hashtags)
+        return '' if not len(self.hashtags) else ('#'+' #'.join(
+            self.hashtags))
 
     def get_url(self):
         return self.tweet_url
