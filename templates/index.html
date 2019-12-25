@@ -8,6 +8,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Tag Filter - VGasparini</title>
     <meta name="description" content="A Twitter aplication that filter tweets by a list of tags">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='favicon/apple-icon-57x57.png') }}">
+    <link rel='apple-touch-icon' sizes='60x60' href="{{ url_for('static', filename='favicon/apple-icon-60x60.png') }}">
+    <link rel='apple-touch-icon' sizes='72x72' href="{{ url_for('static', filename='favicon/apple-icon-72x72.png') }}">
+    <link rel='apple-touch-icon' sizes='76x76' href="{{ url_for('static', filename='favicon/apple-icon-76x76.png') }}">
+    <link rel='apple-touch-icon' sizes='114x114'
+        href="{{ url_for('static', filename='favicon/apple-icon-114x114.png') }}">
+    <link rel='apple-touch-icon' sizes='120x120'
+        href="{{ url_for('static', filename='favicon/apple-icon-120x120.png') }}">
+    <link rel='apple-touch-icon' sizes='144x144'
+        href="{{ url_for('static', filename='favicon/apple-icon-144x144.png') }}">
+    <link rel='apple-touch-icon' sizes='152x152'
+        href="{{ url_for('static', filename='favicon/apple-icon-152x152.png') }}">
+    <link rel='apple-touch-icon' sizes='180x180'
+        href="{{ url_for('static', filename='favicon/apple-icon-180x180.png') }}">
+    <link rel='icon' type='image/png' sizes='192x192'
+        href="{{ url_for('static', filename='favicon/android-icon-192x192.png') }}">
+    <link rel='icon' type='image/png' sizes='32x32'
+        href="{{ url_for('static', filename='favicon/favicon-32x32.png') }}">
+    <link rel='icon' type='image/png' sizes='96x96'
+        href="{{ url_for('static', filename='favicon/favicon-96x96.png') }}">
+    <link rel='icon' type='image/png' sizes='16x16'
+        href="{{ url_for('static', filename='favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
@@ -36,51 +62,60 @@
     </nav>
     <header id="app" class="masthead bg-primary text-white text-center">
         <div class="container">
-            <h1>Tag Filter</h1>
+            <h1>Tag Filter
+                <img src="{{ url_for('static', filename='favicon/apple-icon-120x120.png') }}" />
+            </h1>
             <br>
-            <p>Para utilizar, insira as palavras-chave que deseja filtar separadas por ponto e vírgula <strong>[ ;
-                    ]</strong>
-                <br>Em seguida, pressione o botão "Adicionar".</p>
+            <p>Para utilizar, insira a palavra-chave que deseja filtar.<br>Em seguida, pressione o botão
+                "Adicionar".<br>Para remover uma tag, basta clicar sobre o <strong>"X"</strong>.
+            </p>
             <hr class="star-light">
         </div>
+
         <div class="card" style="margin-right: 30px;margin-left: 30px;">
             <div class="card-header">
-                <div>
-                    <h5 class="text-dark">Tuítes</h5>
-                    <form action="/" method="POST">
-                        <button class="btn btn-success" type="submit">Atualizar</button>
-                    </form>
-                </div>
-
-            </div>
-            <form action="/" method="POST">
-                <div class="input-group"
-                    style="margin-right: 30px;margin-left: 30px;width: auto;margin-bottom: 10px;margin-top: 10px;">
-                    <div class="input-group-prepend">
-                    </div><input id="tag_input" name="tag_input" class="form-control" type="text"
-                        style="width: 200px; height: 45px;"
-                        placeholder="Insira aqui o que deseja acompanhar. Assunto ou hastag">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">Adicionar</button>
+                <h5 class="text-dark">Tags</h5>
+                <form action="/" method="POST">
+                    <div class="input-group d-flex justify-content-center"
+                        style="margin-right: 30px;margin-left: 30px;width: auto;margin-bottom: 10px;margin-top: 10px;">
+                        <div class="input-group-prepend">
+                        </div><input id="tag_input" name="tag_input" class="form-control" type="text"
+                            style="width: 200px; height: 45px;"
+                            placeholder="Insira aqui o que deseja acompanhar. Assunto ou hastag">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">Adicionar</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="container" style="width: auto;">
+                    <div class="text-left">
+                        <form action="/" method="POST">
+                            <div class="btn-toolbar d-flex justify-content-center">
+                                <!-- TAGS INICIO -->
+                                {% for tag in tags %}
+                                <div class="btn-group" role="group">
+                                    <button
+                                        class="btn btn-{{ ['primary','secondary', 'info', 'warning', 'danger'] | random }}"
+                                        type="submit" name="tag_button" value="{{tag}}"
+                                        style="margin-bottom: 5px; margin-right: 5px;margin-left: 5px;">{{tag}}
+                                        <strong>X</strong></button>
+                                </div>
+                                {% endfor %}
+                                <!-- TAGS FIM -->
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </form>
-            <div class="container" style="margin-right: 10px;margin-left: 10px;width: auto;">
-                <div class="text-left">
-                    <form action="/" method="POST">
-                        <div class="btn-toolbar">
-                            <!-- TAGS INICIO -->
-                            {% for tag in tags %}
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-primary" type="submit" name="tag_button" value="{{tag}}"
-                                    style="margin-right: 5px;margin-left: 5px;">{{tag}} <strong>X</strong></button>
-                            </div>
-                            {% endfor %}
-                            <!-- TAGS FIM -->
-                        </div>
-                    </form>
-                </div>
             </div>
+            <br>
+            <div>
+                <h5 class="text-dark text-center">Tuítes</h5>
+                <form action="/" method="POST">
+                    <button class="btn btn-success" type="submit">Atualizar</button>
+                </form>
+            </div>
+            <hr>
+
             <div class="card-body text-left">
                 <!--  TWEETS INICIO -->
                 {% for tweet in tweets %}
