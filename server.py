@@ -1,5 +1,6 @@
 import os
 from time import sleep
+from stdout import log
 
 from flask import Flask, render_template, request, redirect
 from twitter_stream import Extractor
@@ -33,7 +34,7 @@ def update(extractors):
     global tweets
 
     for extractor in extractors:
-        print("Retrieving data for tag:", str(extractor.hashtag_to_track))
+        log("Retrieving data for tag:", str(extractor.hashtag_to_track))
         extractor.run()
         sleep(1)
         for stream in extractor.streams:
@@ -81,7 +82,7 @@ class App():
                     for i in range(len(extractors)):
                         if data in extractors[i].hashtag_to_track:
                             for stream in extractors[i].streams:
-                                print("Closing", data, "stream")
+                                log("Closing", data, "stream")
                                 stream.disconnect()
                             to_delete.append(i)
                     for i in to_delete[::-1]:
@@ -103,6 +104,6 @@ class App():
         self.app.run(host='0.0.0.0', port=port)
 
 
+app = App()
 if __name__ == '__main__':
-    app = App()
     app.run()

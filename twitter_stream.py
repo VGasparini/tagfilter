@@ -1,5 +1,6 @@
 from config import *
 from stream import *
+from stdout import log
 
 
 class Extractor():
@@ -14,7 +15,7 @@ class Extractor():
             self.api = API(self.credentials)
             self.api_owner = api.me()
         except:
-            print("Error: Unable to authenticate")
+            log("Error: Unable to authenticate")
 
         self.hashtag_to_track = hashtag_to_track
         self.streams = list()
@@ -30,5 +31,5 @@ class Extractor():
                 self.streams.append(myStream)
         except Exception as e:
             myStream.disconnect()
-            print(str(e))
-            print.exit("Twitter stream disconnected")
+            log(str(e))
+            log.exit("Twitter stream disconnected")

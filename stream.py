@@ -1,6 +1,7 @@
 from tweet import *
 import time
 from tweepy import Stream, StreamListener, API, models
+from stdout import log
 
 
 class Listener(StreamListener):
@@ -17,13 +18,13 @@ class Listener(StreamListener):
         self.limit = limit
 
     def on_disconnect(self, notice):
-        print(notice)
+        log(notice)
 
     def on_connect(self):
-        print("Stream API Connected")
+        log("Stream API Connected")
 
-    def on_limit(self, status):
-        print("Rate Limit Exceeded, Sleep for 1 Min")
+    def on_limit(self):
+        log("Rate Limit Exceeded, Sleep for 1 Min")
         time.sleep(60)
 
     def on_status(self, status):
@@ -37,4 +38,7 @@ class Listener(StreamListener):
             return True
 
     def on_error(self, status):
-        print(status)
+        if status == 420:
+            self.on_limit()
+        else:
+            log(status)
