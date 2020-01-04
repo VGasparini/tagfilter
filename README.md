@@ -22,6 +22,17 @@ Aplicação para acompanhamento de tags do Twitter
 * Sob posse das credenciais do app, preencha o arquivo ```credentials.sample``` e renomeie para ```credentials.json```.
 * Inicie o serviço através do comando ```python3 server.py```
 
+## Testes
+
+* Os testes automatizados foram desenvolvidos utilizando a biblioteca nativa [unittest](https://docs.python.org/3/library/unittest.html)
+* Para realizar os testes execute o arquivo ```test.py```
+* A rotina de testes verifica:
+    * Se o servidor está funcional
+    * Se a aplicação inicia sem nenhuma tag
+    * Se a inserção de tag funciona
+    * Se a inserção de uma tag duplicada é tratada
+    * Se a removação da tag funciona
+
 ## Documentação auxiliar
 
 * [Twitter API reference](https://developer.twitter.com/en/docs/api-reference-index)
