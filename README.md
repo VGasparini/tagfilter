@@ -2,8 +2,8 @@
 Aplicação para acompanhamento de tags do Twitter
 
 ## Desafio
-
-* Cadastrar e remover hashtags que queremos acompanhar
+> Projeto desenvolvido como parte do processo de seleção da [Magrathea Labs](https://www.magrathealabs.com/) para posição de estágio
+* Cadastrar e remover hashtags
 * Coletar com frequência mensagens publicadas no Twitter contendo as hashtags (dentro do limite da API)
 * Listar as mensagens coletadas mostrando: mensagem, autor, data de publicação
 * Filtrar as mensagens listadas por hashtag
@@ -32,29 +32,16 @@ Aplicação para acompanhamento de tags do Twitter
     * Se a inserção de tag funciona
     * Se a inserção de uma tag duplicada é tratada
     * Se a removação da tag funciona
+    
+## Deploy
+
+* A aplicação está disponivel para uso no endereço [http://tag-filter.herokuapp.com/](http://tag-filter.herokuapp.com/)
+* Está sendo utilizado o plano gratuito da plataforma de cloud [Heroku](https://dashboard.heroku.com/)
 
 ## Documentação auxiliar
 
 * [Twitter API reference](https://developer.twitter.com/en/docs/api-reference-index)
 * [Flask](https://www.palletsprojects.com/p/flask/)
 
-## TODO list
-
-### Back
-* ~Conectar com a API do Twitter~
-* ~Cria uma stream de dados~
-* ~Filtrar tweets por um conjunto de hashtags~
-* ~Formatar dados para o padrão: mensagem, autor, data de publicação~
-* ~Separar rotinas~
-* ~Preparar objetos para usar no front~
-
-### Front
-* ~Criar um site básico~
-* ~Integrar campo de inserção de hashtags~
-* ~Exibir mensagens filtradas~
-* ~Interagir com filtros (remover)~
-
 ## Licença
 [MIT](https://choosealicense.com/licenses/mit/)
-
-> Projeto desenvolvido como parte do processo de seleção da [Magrathea Labs](https://www.magrathealabs.com/)
