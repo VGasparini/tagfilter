@@ -1,21 +1,31 @@
 # Tag Filter
 Aplicação para acompanhamento de tags do Twitter
 
-## Requisitos do sistema
+## Desafio
 
 * Cadastrar e remover hashtags que queremos acompanhar
 * Coletar com frequência mensagens publicadas no Twitter contendo as hashtags (dentro do limite da API)
 * Listar as mensagens coletadas mostrando: mensagem, autor, data de publicação
 * Filtrar as mensagens listadas por hashtag
 
-## Tecnologias
+## Instalação
 
-* Uso do git
-* Uso de testes automatizados **Consultar com Magrathea**
-* Documentação (README.md com instruções)
-* Deploy da aplicação (recomendamos Heroku por ter plano free)
-* Front-end minimamente estruturado **Flask?**
-* Pode ser desenvolvido em uma das seguintes linguagens: Ruby, **Python**, Java, Go, JavaScript ou Elixir.
+* Clone este repositório com o comando ```git clone https://github.com/VGasparini/tag-filter```
+* Agora dentro da pasta criada, extraia o arquivo ```static.zip``` com o descompactador de sua preferência.
+* Crie um ambiente virtual Python com o comando ```virtualenv venv```. Caso não possua ainda este utilitário, instale via ```python3 -m pip install virtualenv```
+* Uma vez criado o ambiente virtual, ative-o através do comando ```source venv/bin/activate```
+* Instale todas as dependências do projeto ```pip3 install -r requirements.txt```
+
+## Configuração
+
+* Para utilizar a aplicação é necessário criar um novo app para obter as credenciais de acesso a API. Para isso, acesse o link [Twitter Devolopers](https://developer.twitter.com/).
+* Sob posse das credenciais do app, preencha o arquivo ```credentials.sample``` e renomeie para ```credentials.json```.
+* Inicie o serviço através do comando ```python3 server.py```
+
+## Documentação auxiliar
+
+* [Twitter API reference](https://developer.twitter.com/en/docs/api-reference-index)
+* [Flask](https://www.palletsprojects.com/p/flask/)
 
 ## TODO list
 
@@ -33,7 +43,7 @@ Aplicação para acompanhamento de tags do Twitter
 * ~Exibir mensagens filtradas~
 * ~Interagir com filtros (remover)~
 
-## License
+## Licença
 [MIT](https://choosealicense.com/licenses/mit/)
 
 > Projeto desenvolvido como parte do processo de seleção da [Magrathea Labs](https://www.magrathealabs.com/)
