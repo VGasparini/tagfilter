@@ -17,10 +17,10 @@ limit = 5
 
 
 def add_tweet(tweet):
-    '''
+    """
     Append to tweets list a tuple. Each tuple contains tags information and tweet information
     The tweet ID is added to an IDs set to prevent duplicated tweets
-    '''
+    """
     global tweets
 
     tweets.append((tweet[1], tweet[0]))
@@ -28,9 +28,9 @@ def add_tweet(tweet):
 
 
 def update(extractors):
-    '''
+    """
     Iterate above extractors list updating tweets extracted for each
-    '''
+    """
     global tweets
 
     for extractor in extractors:
@@ -45,28 +45,27 @@ def update(extractors):
     tweets.sort(reverse=True)
 
 
-class App():
+class App:
     def __init__(self):
         self.app = Flask(__name__)
 
-        @self.app.route("/", methods=['GET', 'POST'])
+        @self.app.route("/", methods=["GET", "POST"])
         def index():
 
-            if request.method == 'POST':
+            if request.method == "POST":
                 # Deal with diferrent buttons pressed
 
-                if 'tag_input' in request.form.keys():
+                if "tag_input" in request.form.keys():
                     # Add new tag from input field
-                    data = list(request.form['tag_input'].replace(
-                        ' ', '').split(';'))
+                    data = list(request.form["tag_input"].replace(" ", "").split(";"))
                     for tag in data:
                         tags.add(tag)
                         ex = Extractor([tag])
                         extractors.append(ex)
 
-                elif 'tag_button' in request.form.keys():
+                elif "tag_button" in request.form.keys():
                     # Removes tag button when is pressed
-                    data = request.form['tag_button']
+                    data = request.form["tag_button"]
                     tags.remove(data)
 
                     # Remove tweets from that tag
@@ -93,17 +92,17 @@ class App():
             sleep(1)
             # Controlling feed showing
             if len(extractors):
-                while(len(tweets) >= limit):
+                while len(tweets) >= limit:
                     tweets.pop(0)
                 update(extractors)
 
             return render_template("index.html", tweets=tweets, tags=tags)
 
     def run(self):
-        port = int(os.environ.get('PORT', 5000))
-        self.app.run(host='0.0.0.0', port=port)
+        port = int(os.environ.get("PORT", 5000))
+        self.app.run(host="0.0.0.0", port=port)
 
 
 app = App()
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run()

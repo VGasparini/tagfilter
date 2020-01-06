@@ -25,7 +25,7 @@ Aplicação para acompanhamento de tags do Twitter
 ## Testes
 
 * Os testes automatizados foram desenvolvidos utilizando a biblioteca nativa [unittest](https://docs.python.org/3/library/unittest.html)
-* Para realizar os testes execute o arquivo ```test.py```
+* Para realizar os testes execute ```python3 test.py -v```
 * A rotina de testes verifica:
     * Se o servidor está funcional
     * Se a aplicação inicia sem nenhuma tag
@@ -43,5 +43,11 @@ Aplicação para acompanhamento de tags do Twitter
 * [Twitter API reference](https://developer.twitter.com/en/docs/api-reference-index)
 * [Flask](https://www.palletsprojects.com/p/flask/)
 
+## Code formatting
+
+Foi utilizado a ferramenta [Black](https://black.readthedocs.io/en/stable/) para a formatação do código.
+
+
 ## Licença
 [MIT](https://choosealicense.com/licenses/mit/)
+

@@ -1,5 +1,7 @@
-from server import app
 import unittest
+
+from multiprocessing import Process
+from server import app
 
 
 class TagFilterTest(unittest.TestCase):
@@ -8,8 +10,8 @@ class TagFilterTest(unittest.TestCase):
         self.renew()
 
     def renew(self):
-        self.response = self.server.get('/')
-        self.response_str = str(self.response.data.decode('utf-8'))
+        self.response = self.server.get("/")
+        self.response_str = str(self.response.data.decode("utf-8"))
 
     def test_00_get(self):
         """
@@ -21,39 +23,46 @@ class TagFilterTest(unittest.TestCase):
         """
         Testing if page has none tags
         """
-        self.assertNotIn('name="tag_button"',
-                         self.response_str, "Should be empty")
+        self.assertNotIn('name="tag_button"', self.response_str, "Should be empty")
 
     def test_02_add_tag(self):
         """
         Testing if 'tecnologia' tag are added
         """
-        data = {'tag_input': 'tecnologia'}
-        self.server.post('/', data=data)
+        data = {"tag_input": "tecnologia"}
+        self.server.post("/", data=data)
         self.renew()
-        self.assertIn('name="tag_button"', self.response_str,
-                      "Should has 'tecnologia' button tag")
+        self.assertIn(
+            'name="tag_button"', self.response_str, "Should has 'tecnologia' button tag"
+        )
 
     def test_03_add_duplicated_tag(self):
         """
         Testing if trying to add 'tecnologia' duplicated tag are treated
         """
-        data = {'tag_input': 'tecnologia'}
-        self.server.post('/', data=data)
+        data = {"tag_input": "tecnologia"}
+        self.server.post("/", data=data)
         self.renew()
-        self.assertEqual(1, self.response_str.count(
-            'name="tag_button" value="tecnologia"'), "Shouldn't has two 'tecnologia' buttons")
+        self.assertEqual(
+            1,
+            self.response_str.count('name="tag_button" value="tecnologia"'),
+            "Shouldn't has two 'tecnologia' buttons",
+        )
 
     def test_04_remove_tag(self):
         """
         Testing remove a tag
         """
-        data = {'tag_button': 'tecnologia'}
-        self.server.post('/', data=data)
+        data = {"tag_button": "tecnologia"}
+        self.server.post("/", data=data)
         self.renew()
-        self.assertNotIn('name="tag_button"', self.response_str,
-                         "Should remove 'tecnologia' tag")
+        self.assertNotIn(
+            'name="tag_button"', self.response_str, "Should remove 'tecnologia' tag"
+        )
 
 
-if __name__ == '__main__':
-    unittest.main()
+if __name__ == "__main__":
+    test = Process(target=unittest.main)
+    test.start()
+    test.join()
+    test.terminate()

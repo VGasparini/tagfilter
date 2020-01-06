@@ -1,3 +1,8 @@
+from datetime import datetime
+
+
 def log(*message):
-    # print(*message)
+    date = "[" + str(datetime.now()) + "]"
+    text = "".join(message)
+    print(date, text)
     return

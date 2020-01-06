@@ -1,13 +1,14 @@
-from tweet import *
 import time
+
+from tweet import *
 from tweepy import Stream, StreamListener, API, models
 from stdout import log
 
 
 class Listener(StreamListener):
-    '''
+    """
     The Listener class handles tweets that are received from the twitter API-stream.
-    '''
+    """
 
     def __init__(self):
         super().__init__()

@@ -3,17 +3,17 @@ from stream import *
 from stdout import log
 
 
-class Extractor():
-    '''
+class Extractor:
+    """
     This class creates the data listener based on a list of tags to filter
     Each listener stores a list of tweets 
-    '''
+    """
 
     def __init__(self, hashtag_to_track):
         self.credentials = Credentials().authenticate()
         try:
             self.api = API(self.credentials)
-            self.api_owner = api.me()
+            self.api_owner = self.api.me()
         except:
             log("Error: Unable to authenticate")
 
