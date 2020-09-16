@@ -2,6 +2,8 @@
 
 Aplicação para acompanhamento de tags do Twitter
 
+![](https://github.com/VGasparini/tagfilter/blob/master/tagfilter.gif)
+
 > Projeto desenvolvido como parte da avaliação para a disciplina de Engenharia de Software
 
 ## Escopo
