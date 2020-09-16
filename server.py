@@ -12,7 +12,7 @@ from twitter_stream import Extractor
 tweets = list()
 ids = set()
 tags = set()
-extractors = list()
+extractors = set()
 limit = 5
 
 
@@ -57,11 +57,12 @@ class App:
 
                 if "tag_input" in request.form.keys():
                     # Add new tag from input field
-                    data = list(request.form["tag_input"].replace(" ", "").split(";"))
+                    data = list(request.form["tag_input"].split(";"))
                     for tag in data:
-                        tags.add(tag)
-                        ex = Extractor([tag])
-                        extractors.append(ex)
+                        if tag not in tags:
+                            tags.add(tag)
+                            ex = Extractor([tag])
+                            extractors.add(ex)
 
                 elif "tag_button" in request.form.keys():
                     # Removes tag button when is pressed
@@ -78,14 +79,14 @@ class App:
 
                     # Destroys that tag stream
                     to_delete = list()
-                    for i in range(len(extractors)):
-                        if data in extractors[i].hashtag_to_track:
-                            for stream in extractors[i].streams:
-                                log("Closing", data, "stream")
+                    for i in extractors:
+                        if data in i.hashtag_to_track:
+                            for stream in i.streams:
+                                log("Closing ", data, " stream")
                                 stream.disconnect()
                             to_delete.append(i)
                     for i in to_delete[::-1]:
-                        extractors.pop(i)
+                        extractors.remove(i)
                 else:
                     return redirect(request.url)
 
