@@ -29,7 +29,7 @@ class Extractor:
                 for tag in self.hashtag_to_track:
                     listener = Listener()
                     # Setting limit to better network usage
-                    listener.set_limit(15)
+                    listener.set_limit(3)
                     myStream = Stream(auth=self.api.auth, listener=listener)
                     atual_stream = myStream
                     myStream.filter(track=[tag], is_async=True)
