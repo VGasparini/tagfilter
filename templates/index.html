@@ -6,7 +6,7 @@
     <meta http-equiv="refresh" content="20">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Tag Filter - VGasparini</title>
+    <title>Tag Filter</title>
     <meta name="description" content="A Twitter aplication that filter tweets by a list of tags">
     <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='favicon/apple-icon-57x57.png') }}">
     <link rel='apple-touch-icon' sizes='60x60' href="{{ url_for('static', filename='favicon/apple-icon-60x60.png') }}">
@@ -54,7 +54,7 @@
                     <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
                             class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">SOBRE</a></li>
                     <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
-                            class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">CONTATO</a>
+                            class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">CRIADORES</a>
                     </li>
                 </ul>
             </div>
@@ -62,13 +62,8 @@
     </nav>
     <header id="app" class="masthead bg-primary text-white text-center">
         <div class="container">
-            <h1>Tag Filter
-                <img src="{{ url_for('static', filename='favicon/apple-icon-120x120.png') }}" />
-            </h1>
-            <br>
-            <p>Para utilizar, insira a palavra-chave que deseja filtar.<br>Em seguida, pressione o botão
-                "Adicionar".<br>Para remover uma tag, basta clicar sobre o <strong>"X"</strong>.
-            </p>
+            <h1>Tag Filter</h1>
+                
             <hr class="star-light">
         </div>
 
@@ -95,7 +90,7 @@
                                 {% for tag in tags %}
                                 <div class="btn-group" role="group">
                                     <button
-                                        class="btn btn-{{ ['primary','secondary', 'info', 'warning', 'danger'] | random }}"
+                                        class="btn btn-primary"
                                         type="submit" name="tag_button" value="{{tag}}"
                                         style="margin-bottom: 5px; margin-right: 5px;margin-left: 5px;">{{tag}}
                                         <strong>X</strong></button>
@@ -148,11 +143,8 @@
             <div class="row">
                 <div class="col-lg-4 ml-auto">
                     <p class="lead text-justify"><strong>Tag Filter&nbsp;é uma aplicação para acompanhamento de tags no
-                            Twitter.</strong><br><strong>Construido em Python, Tag Filter foi desenvolvido como parte do
-                            processo seletivo da empresa </strong><a href="https://magrathealabs.com/"
-                            style="color: #09493c">
-                            <strong>Magrathea
-                                Labs</strong></a>.</p>
+                            Twitter.</strong><br><strong>Construido em Python, Tag Filter foi desenvolvido para a disciplina
+                            de Engenharia de Software.</strong></p>
                 </div>
                 <div class="col-lg-4 mr-auto">
                     <p class="lead text-justify">Para construção da solução foi utilizado o <em>wrapper </em><a
@@ -172,26 +164,30 @@
         </div>
     </section>
     <section id="contact">
-        <div class="container">
-            <h2 class="text-uppercase text-center text-secondary mb-0">CONTATO</h2>
+        <div class="container center">
+            <h2 class="text-uppercase text-center text-secondary mb-0">CRIADORES</h2>
             <hr class="star-dark mb-5">
 
-            <div class="form-group">
-                <h1 class="text-center">Vinicius Gasparini</h1>
-                <p class="text-left" style="font-size: 20px;"><br><i class="fa fa-github-square"
-                        style="font-size: 24px;"></i>&nbsp;<a href="https://github.com/VGasparini"
-                        target="_blank">github.com/VGasparini</a><br><i class="fa fa-linkedin-square"
-                        style="font-size: 24px;"></i>&nbsp;<a href="https://www.linkedin.com/in/gasparinivinicius"
-                        target="_blank">linkedin.com/in/gasparinivinicius</a><br>
-                    <i class="fa fa-envelope" style="font-size: 21px;"></i>&nbsp;<a
-                        href="mailto:viniciuszeiko@gmail.com" target="_blank">viniciuszeiko@gmail.com</a><br><i
-                        class="fa fa-home" style="font-size: 24px;"></i>&nbsp;<a href="https://vgasparini.dev/"
-                        target="_blank">vgasparini.dev</a></p>
+            <div class="row">
+            <div class="col-sm-3"></div>
+                <div class="col-sm-4">
+                    <h3 >Vinicius Gasparini</h1>
+                    <p class="text-left" style="font-size: 20px;">
+                        <i class="fa fa-envelope" style="font-size: 21px;"></i>&nbsp;<a
+                            href="mailto:viniciuszeiko@gmail.com" target="_blank">viniciuszeiko@gmail.com</a><br></p>
+                </div>
+                <div class="col-sm-4">
+                    <h3 >Gabriela da Silva</h1>
+                    <p class="text-left" style="font-size: 20px;">
+                        <i class="fa fa-envelope" style="font-size: 21px;"></i>&nbsp;<a
+                            href="mailto:gabslva@gmail.com" target="_blank">gabslva@gmail.com</a><br></p>
+                </div>
+                <div class="col-sm-3"></div>
             </div>
         </div>
     </section>
     <div class="copyright py-4 text-center text-white">
-        <div class="container"><small>Copyright ©&nbsp;VGasparini 2019</small></div>
+        <div class="container"><small>Copyright ©&nbsp;VGasparini 2020</small></div>
     </div>
     <div class="d-lg-none scroll-to-top position-fixed rounded"><a
             class="d-block js-scroll-trigger text-center text-white rounded" href="#page-top"><i
