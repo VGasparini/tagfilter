@@ -13,19 +13,20 @@ class TagFilterTest(unittest.TestCase):
         self.response = self.server.get("/")
         self.response_str = str(self.response.data.decode("utf-8"))
 
-    def test_get(self):
+    def test_00_get_root_route(self):
         """
         Testing if page status code is 200 on root route
         """
         self.assertEqual(200, self.response.status_code, "Should be 200")
 
-    def test_empty_tag(self):
+    def test_01_empty_tags(self):
         """
         Testing if page has none tags
         """
-        self.assertNotIn('name="tag_button"', self.response_str, "Should be empty")
+        self.assertNotIn('name="tag_button"',
+                         self.response_str, "Should be empty")
 
-    def test_add_tag(self):
+    def test_02_add_tag(self):
         """
         Testing if 'tecnologia' tag are added
         """
@@ -36,7 +37,7 @@ class TagFilterTest(unittest.TestCase):
             'name="tag_button"', self.response_str, "Should has 'tecnologia' button tag"
         )
 
-    def test_add_duplicated_tag(self):
+    def test_03_add_duplicated_tag(self):
         """
         Testing if trying to add 'tecnologia' duplicated tag are treated
         """
@@ -52,7 +53,7 @@ class TagFilterTest(unittest.TestCase):
             "Shouldn't has two 'tecnologia' buttons",
         )
 
-    def test_remove_tag(self):
+    def test_04_remove_tag(self):
         """
         Testing remove a tag
         """
@@ -68,7 +69,4 @@ class TagFilterTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    test = Process(target=unittest.main)
-    test.start()
-    test.join()
-    test.terminate()
+    unittest.main()
