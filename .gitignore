@@ -2,7 +2,6 @@ credentials.json
 .env
 *.pyc
 venv
-static
 web
 
 # Byte-compiled / optimized / DLL files
